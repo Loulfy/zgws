@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>WebSocket Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script type="text/javascript">
+        var ws = new WebSocket('ws://' + location.host + '/gateway');
+
+        if (!window.console) { window.console = { log: function() {} } };
+
+        ws.onopen = function(ev)  { console.log(ev); };
+        ws.onerror = function(ev) { console.log(ev); };
+        ws.onclose = function(ev) { console.log(ev); };
+        ws.onmessage = function(ev) {
+            console.log(ev);
+        };
+
+        window.onload = function() {
+            document.getElementById('toggle').onclick = function(ev) {
+                console.log("peeew");
+                ws.send("pew");
+            };
+        };
+    </script>
+</head>
+<body>
+<div class="content">
+    <h1>Websocket Zigbee Gateway</h1>
+    <button id="toggle">Toggle</button>
+</div>
+</body>
+</html>
